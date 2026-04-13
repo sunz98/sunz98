@@ -1,6 +1,5 @@
 ## Hi there 👋
 
-<!--
 **sunz98/sunz98** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 <div align= "center">
     <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=120&text=&animation=&fontColor=000000&fontSize=70" />
@@ -36,4 +35,3 @@ Here are some ideas to get you started:
 - 📫 How to reach me: ...
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
--->
