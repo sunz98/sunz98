@@ -1,0 +1,3 @@
+# Separate Sites preview checkout; GitHub Pages uses the root website.
+sites/
+.DS_Store
