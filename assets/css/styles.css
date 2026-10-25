@@ -327,6 +327,11 @@ nav a:hover,nav a[aria-current],.text-link:hover {
   grid-template-columns:1fr 1.2fr;
   gap:90px;
   border-bottom:1px solid var(--border);
+  overflow-wrap:anywhere;
+}
+
+.about>div {
+  min-width:0;
 }
 
 .lead {
@@ -342,11 +347,22 @@ nav a:hover,nav a[aria-current],.text-link:hover {
 
 .about-content>.muted {
   font-size:14px;
+  line-height:1.95;
+}
+
+.about-content>p+p {
+  margin-top:20px;
+}
+
+.about-content>.muted strong {
+  color:var(--heading);
+  font-weight:600;
 }
 
 .about-facts {
   display:flex;
-  gap:52px;
+  flex-wrap:wrap;
+  gap:20px 32px;
   margin-top:28px;
 }
 
