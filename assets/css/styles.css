@@ -400,39 +400,51 @@ nav a:hover,nav a[aria-current],.text-link:hover {
   line-height:1.9;
 }
 
-.stack-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:white;
+#stack .section-caption {
+  max-width:440px;
 }
 
-.stack-item {
-  padding:26px;
+#stack .section-heading {
+  gap:28px;
+}
+
+#stack .stack-grid {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface);
+}
+
+#stack .stack-item {
+  min-width:0;
+  padding:26px 20px;
   border-right:1px solid var(--border);
 }
 
-.stack-item:last-child {
+#stack .stack-item:last-child {
   border:0;
 }
 
-.stack-symbol {
-  font-family:monospace;
-  font-size:23px;
-  color:var(--primary);
-  display:block;
-  margin-bottom:12px;
-}
-
-.stack-item h3 {
+#stack .stack-item h3 {
   font-size:13px;
-  margin-bottom:8px;
+  margin-bottom:16px;
 }
 
-.stack-item p {
+#stack .stack-item ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 20px;
   font-size:12px;
   color:var(--secondary);
+}
+
+#stack .stack-item li {
+  flex-basis:100%;
+  overflow-wrap:anywhere;
 }
 
 .projects-section {
@@ -796,8 +808,16 @@ details p {
   .workflow-main {
     padding:20px;
   }
-  .stack-item {
+  #stack .stack-grid {
+    grid-template-columns:1fr;
+  }
+  #stack .stack-item {
     padding:20px;
+    border-right:0;
+    border-bottom:1px solid var(--border);
+  }
+  #stack .stack-item li {
+    flex-basis:auto;
   }
   .hero-actions {
     gap:16px;
@@ -911,15 +931,6 @@ details p {
   }
   h2 {
     font-size:26px;
-  }
-  .stack-grid {
-    grid-template-columns:1fr 1fr;
-  }
-  .stack-item:nth-child(2) {
-    border-right:0;
-  }
-  .stack-item:nth-child(-n+2) {
-    border-bottom:1px solid var(--border);
   }
   .project-layout {
     grid-template-columns:1fr;
