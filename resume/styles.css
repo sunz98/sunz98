@@ -42,12 +42,14 @@ ul { padding:0; }
 .intro h2 { margin-top:20px; font-size:25px; font-weight:600; line-height:1.55; letter-spacing:-.7px; }
 .intro h2 span { font-weight:500; }
 .intro-summary { max-width:640px; margin-top:18px; color:var(--secondary); font-size:14px; line-height:1.95; }
-.contact-card { padding:23px 25px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:0 16px 40px #0f172a06; }
+.contact-card { display:grid; grid-template-columns:108px minmax(0,1fr); align-items:start; gap:20px; padding:23px 25px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:0 16px 40px #0f172a06; }
+.profile-photo { display:block; width:108px; height:auto; border:1px solid var(--border); border-radius:8px; object-fit:cover; object-position:center; }
+.contact-card-details { min-width:0; }
 .contact-card-label { margin-bottom:12px; color:var(--primary); font-size:9px; font-weight:700; letter-spacing:1.6px; }
-.contact-card>a { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 14px; padding:10px 0; border-top:1px solid var(--border); }
-.contact-card>a>span { color:var(--secondary); font-size:9px; font-weight:600; letter-spacing:1px; }
-.contact-card>a strong { font-size:11px; font-weight:500; text-align:right; overflow-wrap:anywhere; }
-.contact-card>a strong span { color:var(--primary); }
+.contact-card-details>a { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 14px; padding:10px 0; border-top:1px solid var(--border); }
+.contact-card-details>a>span { color:var(--secondary); font-size:9px; font-weight:600; letter-spacing:1px; }
+.contact-card-details>a strong { font-size:11px; font-weight:500; text-align:right; overflow-wrap:anywhere; }
+.contact-card-details>a strong span { color:var(--primary); }
 
 .resume-section { padding-block:78px 86px; border-top:1px solid var(--border); }
 .section-tint { background:#eef3fa; }
@@ -122,8 +124,12 @@ ul { padding:0; }
   .container { width:min(100% - 64px,900px); }
   .header-inner { flex-wrap:wrap; gap:8px 18px; padding-block:12px; }
   .resume-nav { gap:16px; }
-  .intro { grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr); gap:36px; }
+  .intro { grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:36px; }
   .intro h1 { font-size:54px; }
+  .contact-card { grid-template-columns:84px minmax(0,1fr); gap:14px; padding:18px; }
+  .profile-photo { width:84px; border-radius:7px; }
+  .contact-card-details>a { display:grid; justify-content:start; gap:1px; padding:7px 0; }
+  .contact-card-details>a strong { text-align:left; }
   .stack-grid { grid-template-columns:1fr; }
   .stack-card { display:grid; grid-template-columns:180px 1fr; align-items:start; gap:18px; padding:17px 20px; border-right:0; border-bottom:1px solid var(--border); }
   .stack-card:last-child { border-bottom:0; }
@@ -143,7 +149,8 @@ ul { padding:0; }
   .intro h1 { font-size:52px; letter-spacing:-2.7px; }
   .intro h2 { font-size:21px; }
   .intro-summary { font-size:13px; }
-  .contact-card { padding:19px 20px; }
+  .contact-card { grid-template-columns:88px minmax(0,1fr); gap:16px; padding:18px; }
+  .profile-photo { width:88px; }
   .resume-section { padding-block:60px; }
   .section-heading { display:block; margin-bottom:25px; }
   .section-heading h2 { font-size:26px; }
@@ -168,7 +175,9 @@ ul { padding:0; }
 @media (max-width:360px) {
   .container { width:calc(100% - 32px); }
   .intro h1 { font-size:46px; }
-  .contact-card>a strong { text-align:left; }
+  .contact-card { grid-template-columns:76px minmax(0,1fr); gap:12px; padding:15px; }
+  .profile-photo { width:76px; }
+  .contact-card-details>a strong { text-align:left; }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -188,11 +197,12 @@ ul { padding:0; }
   .intro h1 { font-size:32pt; letter-spacing:-1.5pt; }
   .intro h2 { margin-top:3mm; font-size:15pt; }
   .intro-summary { margin-top:3mm; font-size:9pt; line-height:1.6; }
-  .contact-card { padding:4mm; border-radius:2mm; box-shadow:none; }
+  .contact-card { grid-template-columns:24mm minmax(0,1fr); gap:3mm; padding:4mm; border-radius:2mm; box-shadow:none; }
+  .profile-photo { width:24mm; height:auto; border-radius:1.5mm; }
   .contact-card-label { margin-bottom:1mm; font-size:7pt; }
-  .contact-card>a { padding:2mm 0; }
-  .contact-card>a>span { font-size:6.5pt; }
-  .contact-card>a strong { font-size:7.5pt; }
+  .contact-card-details>a { padding:2mm 0; }
+  .contact-card-details>a>span { font-size:6.5pt; }
+  .contact-card-details>a strong { font-size:7.5pt; }
   .resume-section { padding-block:7mm; }
   .section-heading { margin-bottom:4mm; }
   .section-heading h2 { font-size:17pt; }

@@ -765,9 +765,13 @@ details p {
   margin-top:32px;
 }
 
+.contact-links>a,
 .contact-links>span {
   font-size:13px;
 }
+
+.contact-links>a { color:var(--heading); transition:color .2s; }
+.contact-links>a:hover { color:var(--primary); }
 
 .contact-links small {
   display:block;
@@ -990,7 +994,8 @@ details p {
     font-size:30px;
   }
   .contact-links {
-    gap:30px;
+    flex-wrap:wrap;
+    gap:20px 30px;
   }
   .footer {
     flex-wrap:wrap;
