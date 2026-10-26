@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="박지선 백엔드 개발자 이력서. Spring Boot 기반 서비스 개발, 데이터 처리, 배포와 운영 경험을 소개합니다.">
+  <title>박지선 | Backend Developer Resume</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="포트폴리오로 이동">박지선<span>BACKEND DEVELOPER</span></a>
+      <nav class="resume-nav" aria-label="이력서 섹션">
+        <a href="#stack">기술</a>
+        <a href="#experience">경력</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#education">교육</a>
+        <a href="#contact">연락처</a>
+      </nav>
+      <button class="print-button" id="print-resume" type="button">PDF 저장 <span aria-hidden="true">↗</span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="intro container" id="introduction" aria-labelledby="resume-title">
+      <div class="intro-copy">
+        <p class="eyebrow"><span class="blue-dot" aria-hidden="true"></span>01 / INTRODUCTION</p>
+        <p class="role-label">BACKEND DEVELOPER</p>
+        <h1 id="resume-title">박지선</h1>
+        <h2>설계부터 운영까지,<br><span>경험을 통해 성장하는 백엔드 개발자</span></h2>
+        <p class="intro-summary">Spring Boot 기반 서비스 개발을 중심으로 API 설계, 데이터 처리, 인증·인가, 비동기 작업, 배포 및 운영까지 경험했습니다. 실제 서비스 운영 과정에서 발생한 문제를 분석하고 개선해 왔으며, 팀 리딩과 다양한 직군과의 협업 경험도 갖추고 있습니다.</p>
+      </div>
+      <aside class="contact-card" aria-label="연락 및 프로필 링크">
+        <p class="contact-card-label">CONTACT & LINKS</p>
+        <a href="mailto:pjs98114@gmail.com"><span>EMAIL</span><strong>pjs98114@gmail.com</strong></a>
+        <a href="tel:+821022205930"><span>PHONE</span><strong>010-2220-5930</strong></a>
+        <a href="https://github.com/sunz98" target="_blank" rel="noopener noreferrer"><span>GITHUB</span><strong>github.com/sunz98 <span aria-hidden="true">↗</span></strong></a>
+        <a href="../index.html"><span>PORTFOLIO</span><strong>sunz98.github.io/sunz98 <span aria-hidden="true">↗</span></strong></a>
+      </aside>
+    </section>
+
+    <section class="resume-section container" id="stack" aria-labelledby="stack-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 / TECH STACK</p><h2 id="stack-title">기술 스택</h2></div>
+        <p class="section-caption">프로젝트와 서비스 개발 과정에서 사용한 주요 기술입니다.</p>
+      </div>
+      <div class="stack-grid">
+        <article class="stack-card"><h3>Language</h3><ul class="tag-list"><li>Java</li><li>Python</li></ul></article>
+        <article class="stack-card"><h3>Backend</h3><ul class="tag-list"><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li><li>JWT</li></ul></article>
+        <article class="stack-card"><h3>Database &amp; Messaging</h3><ul class="tag-list"><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>RabbitMQ</li></ul></article>
+        <article class="stack-card"><h3>Infrastructure</h3><ul class="tag-list"><li>Docker</li><li>AWS EC2</li><li>AWS RDS</li><li>GCP</li></ul></article>
+        <article class="stack-card"><h3>AI &amp; External APIs</h3><ul class="tag-list"><li>Spring AI</li><li>Gemini API</li><li>Google Cloud Vision API</li><li>OpenAI API</li><li>Playwright</li><li>Toss Payments</li><li>Kakao OAuth</li><li>KakaoPay API</li></ul></article>
+      </div>
+    </section>
+
+    <section class="resume-section section-tint" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">03 / WORK EXPERIENCE</p><h2 id="experience-title">실제 서비스의 개발과 운영</h2></div>
+          <p class="section-caption">기업과 담당 서비스를 구분해, 역할과 기술적 기여를 정리했습니다.</p>
+        </div>
+        <article class="work-card" aria-labelledby="saudi-title">
+          <header class="work-card-header">
+            <div><h3 id="saudi-title">사우디에셋</h3><p class="job-title">Backend Developer</p></div>
+            <p class="period"><time datetime="2025-07">2025.07</time> — <time datetime="2026-04">2026.04</time></p>
+          </header>
+          <div class="service-label"><span>담당 서비스</span><strong>걱정마AI</strong><span>네이버 플레이스 순위 분석 및 블로그 자동화</span></div>
+          <p class="work-summary">실제 유료 사용자가 이용하는 서비스의 백엔드 개발과 운영에 참여했습니다. 수집 효율, 비동기 작업 처리, 자동화 단계와 API 응답 구조를 개선했습니다.</p>
+          <div class="contribution-list">
+            <section class="contribution"><h4>데이터 수집 파이프라인 개선</h4><ul><li>네이버 GraphQL 요청과 응답 구조를 분석해 브라우저 자동화 기반 수집 방식을 개선했습니다.</li><li>수집 데이터의 갱신 주기와 키워드 우선순위를 재설계해 하루 안에 끝나지 않던 수집을 더 많은 키워드 기준 약 3~4시간으로 단축했습니다.</li></ul></section>
+            <section class="contribution"><h4>RabbitMQ 비동기 데이터 처리</h4><ul><li>크롤링 작업을 RabbitMQ로 전달하고 작업 유형별 큐로 분리했습니다.</li><li>크롤러가 수집한 결과를 API 서버에 전달하고 처리 상태를 관리하는 흐름을 구현했습니다.</li></ul></section>
+            <section class="contribution"><h4>블로그 자동화와 실패 상태 관리</h4><ul><li>OpenAI API 콘텐츠 생성과 Playwright 발행 단계를 분리했습니다.</li><li>진행 상태와 실패 원인을 기록해 전체 과정을 반복하지 않고 문제 지점을 확인·재시도할 수 있도록 개선했습니다.</li></ul></section>
+            <section class="contribution"><h4>API 응답 및 운영 환경 개선</h4><ul><li>요청 때 반복 계산하던 항목을 데이터 적재 시점에 미리 계산·저장해 요청 시 불필요한 연산을 줄였습니다.</li><li>Toss Payments 연동 기능 개발, AWS EC2 개발·운영 환경 관리와 운영 중 기술 문제 해결에 참여했습니다.</li></ul></section>
+          </div>
+          <ul class="tag-list work-tags" aria-label="걱정마AI 사용 기술"><li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>RabbitMQ</li><li>Redis</li><li>Python</li><li>Playwright</li><li>OpenAI API</li><li>Toss Payments</li><li>AWS EC2</li></ul>
+        </article>
+        <article class="work-card support-card" aria-labelledby="concentrix-title">
+          <header class="work-card-header">
+            <div><h3 id="concentrix-title">Concentrix Korea</h3><p class="job-title">Senior IT Technical Support Advisor · 정규직</p></div>
+            <p class="period"><time datetime="2018-04">2018.04</time> — <time datetime="2019-11">2019.11</time></p>
+          </header>
+          <p class="work-summary">스마트폰, 태블릿, 데스크톱, 노트북 등 다양한 디바이스의 기술 문의를 지원했습니다. 고객의 문제를 분석하고 오류 정보와 피드백을 수집해 기술팀에 전달하며 문제 해결과 사용자 중심의 커뮤니케이션 경험을 쌓았습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="resume-section container" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">04 / SELECTED PROJECTS</p><h2 id="projects-title">문제 해결 경험</h2></div>
+        <p class="section-caption">핵심 기여를 간결하게 소개하고, 기술적인 과정은 포트폴리오 상세 페이지로 연결합니다.</p>
+      </div>
+      <div class="project-list">
+        <article class="project-card" aria-labelledby="clear-title">
+          <div class="project-meta"><p class="project-index">PROJECT 01</p><h3 id="clear-title">클리어분양</h3><p class="project-subtitle">미분양 매물 탐색 및 상담 플랫폼</p><p class="period"><time datetime="2024-07">2024.07</time> — <time datetime="2024-09">2024.09</time></p><p class="project-role">백엔드 팀장 · 총 16명</p><div class="project-links"><a href="https://github.com/final-subscribers/backend" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="../projects/clear-sale.html">상세 포트폴리오 ↗</a></div></div>
+          <div class="project-detail"><ul><li>Spring Security·JWT 기반 인증·인가 구현</li><li>Redisson 분산 락으로 상담사 중복 배정 방지</li><li>AWS RDS·Redis·S3 기반 인프라와 Presigned URL 업로드 구성</li><li>ERD·Swagger API 명세 설계, 백엔드 일정 및 직군 간 협업 조율</li></ul><ul class="tag-list" aria-label="클리어분양 기술"><li>Spring Boot</li><li>Spring Security</li><li>JWT</li><li>Redisson</li><li>AWS</li></ul></div>
+        </article>
+        <article class="project-card" aria-labelledby="kitchen-title">
+          <div class="project-meta"><p class="project-index">PROJECT 02</p><h3 id="kitchen-title">에브리키친</h3><p class="project-subtitle">베이킹 특화 공유주방 예약 및 재료 정산 플랫폼</p><p class="period"><time datetime="2025-02">2025.02</time> — <time datetime="2025-06">2025.06</time></p><p class="project-role">팀장 · 총 4명</p><div class="project-links"><a href="https://github.com/Everykitchen" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="../projects/every-kitchen.html">상세 포트폴리오 ↗</a></div></div>
+          <div class="project-detail"><ul><li>Redis TTL 기반 10분 예약 선점 구현</li><li>KakaoPay 예약 이용료 결제와 사용 후 재료비 추가 정산</li><li>베이킹 설비·도구·식재료 관리 기능과 데이터 모델 설계</li><li>Docker·AWS EC2 통합 배포, 개발 환경·Git 협업 규칙·코드 리뷰·일정 관리</li></ul><p class="project-outcome">계획 일정 준수 · 프로젝트 평가 A+</p><ul class="tag-list" aria-label="에브리키친 기술"><li>Spring Boot</li><li>Redis</li><li>Docker</li><li>AWS EC2</li><li>KakaoPay API</li></ul></div>
+        </article>
+        <article class="project-card" aria-labelledby="worry-title">
+          <div class="project-meta"><p class="project-index">PROJECT 03</p><h3 id="worry-title">걱정마AI</h3><p class="project-subtitle">네이버 플레이스 순위 분석 및 블로그 자동화</p><p class="period"><time datetime="2025-07">2025.07</time> — <time datetime="2026-04">2026.04</time></p><p class="project-role">Backend Developer · 개발 및 운영</p><div class="project-links"><a href="../projects/worry-free-ai.html">상세 포트폴리오 ↗</a></div></div>
+          <div class="project-detail"><p>사우디에셋 재직 중 담당한 서비스로, 초기 개발부터 실제 사용자 대상 운영까지 참여했습니다. 수집 구조 개선 후 더 많은 키워드의 데이터를 약 3~4시간 안에 수집하도록 개선한 경험이 있습니다. 상세 기술 기여는 경력 섹션과 포트폴리오에서 확인할 수 있습니다.</p><ul class="tag-list" aria-label="걱정마AI 기술"><li>Spring Boot</li><li>RabbitMQ</li><li>Redis</li><li>OpenAI API</li><li>Playwright</li></ul></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="resume-section section-tint" id="education" aria-labelledby="education-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">05 / EDUCATION</p><h2 id="education-title">전공과 실무 교육</h2></div>
+          <p class="section-caption">소프트웨어 전공과 백엔드·AI 프로젝트 교육을 이수했습니다.</p>
+        </div>
+        <div class="education-list">
+          <article class="education-entry"><div><h3>단국대학교</h3><p>소프트웨어학과 · 졸업</p><p class="period"><time datetime="2021-03">2021.03</time> — <time datetime="2026-08">2026.08</time></p></div><div><p>자료구조, 알고리즘, 운영체제, 데이터베이스, 네트워크 등 소프트웨어 개발 전반의 전공 과목을 이수했습니다.</p><p>학생회 활동 1년</p></div></article>
+          <article class="education-entry"><div><h3>패스트캠퍼스</h3><p>백엔드 개발 부트캠프</p><p class="period"><time datetime="2024-02">2024.02</time> — <time datetime="2024-09">2024.09</time></p></div><div><p>Java·Spring Boot 기반 백엔드 개발을 학습하고 자료구조, 알고리즘, 데이터베이스, API 설계, 서버 배포를 익혔습니다. 프론트엔드·UX/UI·PM과 협업했으며 기업 연계 프로젝트 클리어분양을 수행했습니다.</p></div></article>
+          <article class="education-entry"><div><h3>카이스트와 함께하는 2023 서초AI칼리지</h3><p>AI 프로젝트 실습 과정</p><p class="period"><time datetime="2023-03">2023.03</time> — <time datetime="2023-09">2023.09</time></p></div><div><p>AI 기반 프로젝트 실습 중심 과정을 수료했습니다.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div><p class="eyebrow">06 / CONTACT</p><h2 id="contact-title">박지선 <span>· Backend Developer</span></h2><p>함께 더 나은 서비스를 만들어갈 기회를 기다립니다.</p></div>
+        <div class="contact-actions"><a href="mailto:pjs98114@gmail.com">이메일 보내기 ↗</a><a href="https://github.com/sunz98" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="../index.html">Portfolio ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer"><span>© <span id="year">2026</span> 박지선</span><span>Backend Developer Resume</span><a href="#introduction">맨 위로 ↑</a></footer>
+</body>
+</html>
