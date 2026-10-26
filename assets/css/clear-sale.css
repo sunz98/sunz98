@@ -1,0 +1,30 @@
+/* Clear Sale details extend the shared case-study system. */
+.clear-case .lock-actors { display:flex; gap:12px; margin-bottom:12px; }
+.clear-case .lock-actors span { padding:8px 14px; border-radius:6px; background:#eff6ff; color:var(--primary); font-size:12px; font-weight:600; }
+.clear-case .lock-flow { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.clear-case .lock-flow li:nth-child(4)::after { content:none; }
+.clear-case .incident { padding:24px; margin:16px 0; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+.clear-case .incident-label { color:var(--primary); font-size:11px; font-weight:700; letter-spacing:.5px; margin-bottom:16px; }
+.clear-case .incident h4 { margin:14px 0 4px; font-size:13px; }
+.clear-case .incident p { font-size:13px; }
+.clear-case .auth-flow { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.clear-case .auth-flow li:nth-child(3)::after { content:'↓'; right:50%; top:auto; bottom:-28px; transform:none; }
+.clear-case .auth-flow li:nth-child(4) { grid-column:3; grid-row:2; }
+.clear-case .auth-flow li:nth-child(5) { grid-column:2; grid-row:2; }
+.clear-case .auth-flow li:nth-child(6) { grid-column:1; grid-row:2; }
+.clear-case .auth-flow li:nth-child(4)::after, .clear-case .auth-flow li:nth-child(5)::after { content:'←'; right:auto; left:-22px; }
+.clear-case .improvement { background:#f8fafc; border-left-color:#64748b; }
+.clear-case .improvement h3 { color:var(--heading); }
+.clear-case .storage-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:28px 0; }
+.clear-case .storage-grid article { padding:22px; border:1px solid var(--border); border-radius:10px; background:var(--surface); }
+.clear-case .storage-grid h3 { font-size:15px; }
+.clear-case .storage-grid p { font-size:13px; }
+.clear-case .upload-flow { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.clear-case .upload-flow li:nth-child(4)::after { content:none; }
+@media(max-width:1000px) {
+  .clear-case .lock-flow,.clear-case .auth-flow,.clear-case .upload-flow { grid-template-columns:1fr; }
+  .clear-case .auth-flow li:nth-child(n) { grid-column:auto; grid-row:auto; }
+  .clear-case .lock-flow li:nth-child(n)::after,.clear-case .auth-flow li:nth-child(n)::after,.clear-case .upload-flow li:nth-child(n)::after { content:'↓'; right:50%; left:auto; top:auto; bottom:-28px; transform:none; }
+  .clear-case .lock-flow li:last-child::after,.clear-case .auth-flow li:last-child::after,.clear-case .upload-flow li:last-child::after { content:none; }
+  .clear-case .storage-grid { grid-template-columns:1fr; }
+}

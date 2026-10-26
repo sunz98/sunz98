@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="에브리키친 프로젝트에서 구현한 베이킹 주방 예약, Redis TTL 선점, KakaoPay 재료비 정산과 Docker·AWS EC2 배포 경험.">
+  <title>에브리키친 · 박지선 포트폴리오</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/project.css">
+  <link rel="stylesheet" href="../assets/css/every-kitchen.css">
+</head>
+<body class="case-study kitchen-case">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="header"><a class="brand" href="../index.html">박지선</a><a class="back-link" href="../index.html#projects">← 프로젝트 목록</a></header>
+  <main id="main" class="container">
+    <section class="case-hero" aria-labelledby="case-title">
+      <p class="eyebrow">PROJECT 03 / BACKEND CASE STUDY</p>
+      <h1 id="case-title">에브리키친</h1>
+      <p class="case-subtitle">베이킹 특화 공유주방 예약 및 재료 정산 플랫폼</p>
+      <p class="case-summary">베이킹 공간 예약과 결제 후 재료 정산까지,<br>4인 팀의 설계와 구현·배포를 이끌었습니다</p>
+      <dl class="case-facts">
+        <div><dt>기간</dt><dd>2025.03 ~ 2025.06</dd></div>
+        <div><dt>팀 구성</dt><dd>총 4명 · 프론트엔드 2명, 백엔드 2명</dd></div>
+        <div><dt>역할</dt><dd>팀장 · 백엔드 개발</dd></div>
+        <div><dt>프로젝트 상태</dt><dd>개발 완료 · 현재 미운영</dd></div>
+        <div class="facts-wide"><dt>주요 기술</dt><dd>Spring Boot · Spring Security · JWT · Redis · Docker</dd></div>
+        <div class="facts-wide"><dt>인프라·연동</dt><dd>AWS EC2 · AWS S3 · KakaoPay API · Swagger</dd></div>
+        <div class="facts-wide"><dt>성과</dt><dd>계획 일정 준수 · 배포 완료 · 프로젝트 평가 A+</dd></div>
+      </dl>
+    </section>
+    <nav class="case-toc" aria-label="상세 페이지 목차">
+      <a href="#overview">개요·기능</a><a href="#booking">예약 선점</a><a href="#settlement">재료 정산</a><a href="#deployment">통합 배포</a><a href="#leadership">팀 리딩</a><a href="#reflection">성과·회고</a>
+    </nav>
+
+    <section class="case-section" id="overview" aria-labelledby="overview-title">
+      <p class="eyebrow">01 / OVERVIEW</p><h2 id="overview-title">베이킹 공간의 예약부터 재료 정산까지</h2>
+      <p>에브리키친은 베이킹 공간의 예약, 전문 설비 정보 제공, 재료비 정산을 지원하는 공유주방 대여 플랫폼입니다. 일반 공유주방과 달리 오븐·반죽기·조리 도구·식재료를 함께 관리해야 하는 베이킹 공간의 요구에 착안해 기획했습니다.</p>
+      <p>4인 팀의 팀장으로서 기획, 일정 관리, 개발 환경 구성, ERD·API 명세 설계와 주요 기능 구현, 배포를 주도했습니다.</p>
+      <div class="feature-grid">
+        <article><h3>공간 관리</h3><ul><li>호스트의 주방 등록·수정·삭제</li><li>주방별 예약 가능 시간대 설정</li><li>설비·도구·구비품·식재료 정보 관리</li><li>주방 검색·필터링 및 이미지 업로드</li></ul></article>
+        <article><h3>예약 및 결제</h3><ul><li>Redis 기반 10분 예약 선점</li><li>예약 상태에 따른 흐름 관리</li><li>KakaoPay 예약 이용료 결제</li><li>결제 전·후 취소 규칙 구분</li></ul></article>
+        <article><h3>이용 후 정산</h3><ul><li>호스트가 재료별 단가 등록</li><li>이용자가 실제 재료 사용량 입력</li><li>단가와 수량을 바탕으로 추가 비용 계산</li><li>KakaoPay 추가 결제 연동</li></ul></article>
+      </div>
+      <div class="feature-grid feature-grid-two">
+        <article><h3>사용자 기능</h3><ul><li>Spring Security·JWT 인증</li><li>사용자·호스트 권한 구분</li><li>리뷰·평점 기능</li></ul></article>
+        <article><h3>기술 구성</h3><ul><li>Spring Boot · Redis · Docker</li><li>AWS EC2 · S3</li><li>KakaoPay API · Swagger</li></ul></article>
+      </div>
+    </section>
+
+    <section class="case-section" id="booking" aria-labelledby="booking-title">
+      <p class="eyebrow">02 / CORE ENGINEERING</p><h2 id="booking-title">Redis TTL로 예약 시간대를 잠시 선점하다</h2>
+      <div class="case-block"><h3>문제</h3><p>주방은 같은 시간대에 여러 사용자가 동시에 이용할 수 없습니다. 예약 요청 뒤 결제하지 않는 사용자가 예약 시간을 무기한 점유하지 않도록 결제 대기 시간을 제한해야 했습니다.</p></div>
+      <div class="case-block"><h3>구현 흐름</h3><p>사용자가 주방과 시간대를 선택하면 Redis에서 기존 선점 정보를 확인하고, 값이 없을 때 예약 정보를 저장하면서 TTL을 10분으로 설정했습니다. 예약 정보를 별도의 스케줄러로 만료시키는 방식은 사용하지 않았습니다.</p></div>
+      <figure class="flow-figure"><figcaption>예약과 결제 상태 흐름 <span>TTL은 Redis 선점 정보의 만료를 나타냅니다</span></figcaption>
+        <ol class="flow booking-flow">
+          <li><span class="step-number">01</span><strong>예약 가능</strong><span>주방·시간대 선택</span></li>
+          <li><span class="step-number">02</span><strong>예약 요청</strong><span>기존 선점 정보 조회</span></li>
+          <li><span class="step-number">03</span><strong>Redis 10분 선점</strong><span>결제 대기 상태</span></li>
+          <li><span class="step-number">04</span><strong>KakaoPay 1차 결제</strong><span>주방 이용료 결제</span></li>
+          <li><span class="step-number">05</span><strong>예약 확정</strong><span>예약 상태 관리</span></li>
+          <li><span class="step-number">06</span><strong>주방 이용</strong><span>실제 사용 재료 기록</span></li>
+          <li><span class="step-number">07</span><strong>사용량 입력</strong><span>이용자가 재료별 수량 입력</span></li>
+          <li><span class="step-number">08</span><strong>추가 정산</strong><span>재료비 계산 후 추가 결제</span></li>
+        </ol>
+        <div class="lease-exit"><strong>결제 대기 중 취소 또는 10분 만료</strong><span>Redis 선점 정보 해제</span></div>
+        <p class="case-note">TTL 만료는 Redis 선점 값의 만료를 뜻합니다. 이 만료만으로 DB 예약 상태가 자동 변경된다고 표현하지 않으며, DB 상태와의 구체적인 동기화 방식은 확인되지 않았습니다.</p>
+      </figure>
+      <div class="case-result"><h3>현재 구현의 한계</h3><p>실제 구현에서는 Redis의 기존 값을 조회한 뒤 선점 값을 저장하는 작업을 별도로 수행했습니다. 따라서 일반적인 중복 예약을 제한하는 효과는 있지만, 두 요청이 동시에 조회와 저장 사이에 진입하는 경우까지 원자적 선점을 보장하지는 않습니다.</p></div>
+      <div class="case-block improvement"><h3>개선 과제 · 실제 구현 완료가 아닙니다</h3><ul><li><code>SET NX EX</code> 또는 <code>setIfAbsent</code>와 TTL로 확인·저장을 원자적으로 처리</li><li>결제 확정 시 영구 예약 데이터의 중복 여부 재검증</li><li>선점 만료와 결제 완료가 경합할 때 Redis·DB 상태 정합성 검토</li></ul></div>
+    </section>
+
+    <section class="case-section" id="settlement" aria-labelledby="settlement-title">
+      <p class="eyebrow">03 / CORE ENGINEERING</p><h2 id="settlement-title">이용 후 실제 재료 사용량을 정산하다</h2>
+      <div class="case-block"><h3>문제</h3><p>베이킹 공간은 이용자가 예약할 때 실제 재료 사용량을 확정하기 어렵습니다. 예약 시점에 모든 재료비를 고정하면 사용량 차이를 반영하기 어렵다는 점이 있었습니다.</p></div>
+      <div class="case-block"><h3>해결</h3><p>호스트가 주방에서 제공하는 재료의 단가를 등록하고, 이용자가 사용 후 실제 수량을 입력하면 단가와 수량을 바탕으로 추가 비용을 계산하도록 구현했습니다.</p></div>
+      <figure class="flow-figure"><figcaption>재료 사용 후 추가 결제 <span>KakaoPay 결제를 예약 이용료와 재료비로 나눠 처리</span></figcaption>
+        <ol class="flow settlement-flow"><li><span class="step-number">01</span><strong>호스트</strong><span>재료별 단가 등록</span></li><li><span class="step-number">02</span><strong>예약 이용료 결제</strong><span>KakaoPay 1차 결제</span></li><li><span class="step-number">03</span><strong>주방 이용</strong><span>베이킹 공간·설비 이용</span></li><li><span class="step-number">04</span><strong>이용자</strong><span>재료별 실제 사용량 입력</span></li><li><span class="step-number">05</span><strong>추가 비용 계산</strong><span>단가 × 사용 수량</span></li><li><span class="step-number">06</span><strong>재료비 결제</strong><span>KakaoPay 2차 결제</span></li></ol>
+      </figure>
+      <div class="case-result"><h3>배운 점</h3><p>공간 이용료와 사용 후 확정되는 재료비를 별도 시점에 다루면서, 결제 흐름이 도메인의 실제 사용 과정과 맞물리도록 설계하는 경험을 했습니다.</p></div>
+    </section>
+
+    <section class="case-section" id="deployment" aria-labelledby="deployment-title">
+      <p class="eyebrow">04 / DELIVERY</p><h2 id="deployment-title">Docker 이미지로 프론트엔드와 백엔드를 함께 배포하다</h2>
+      <div class="case-block"><h3>기존 방식의 불편</h3><p>초기에는 프론트엔드와 백엔드를 별도로 배포했습니다. 개발 후반에 수정이 잦아지면서 두 구성요소를 따로 배포하는 과정이 번거로워졌습니다.</p></div>
+      <div class="case-block"><h3>변경</h3><p>프론트엔드와 백엔드를 Docker 이미지로 구성하고 AWS EC2에서 이미지를 가져와 함께 실행하는 통합 배포 방식으로 변경했습니다. 두 구성요소는 공유 데이터베이스를 사용했습니다.</p></div>
+      <figure class="flow-figure"><figcaption>배포 구성 <span>Docker 이미지 기반 EC2 실행</span></figcaption><ol class="flow deploy-flow"><li><span class="step-number">01</span><strong>프론트엔드</strong><span>Docker 이미지</span></li><li><span class="step-number">02</span><strong>백엔드</strong><span>Docker 이미지</span></li><li><span class="step-number">03</span><strong>AWS EC2</strong><span>두 구성요소 함께 실행</span></li><li><span class="step-number">04</span><strong>공유 데이터베이스</strong><span>서비스 데이터 저장</span></li></ol></figure>
+      <p class="case-note">GitHub Actions·Jenkins 기반 자동 배포는 적용하지 않았으며, Docker Compose 사용 여부도 확인되지 않아 기재하지 않았습니다. 배포 시간이나 다운타임 개선 수치는 측정되지 않았습니다.</p>
+    </section>
+
+    <section class="case-section" id="leadership" aria-labelledby="leadership-title">
+      <p class="eyebrow">05 / TEAM LEADERSHIP</p><h2 id="leadership-title">4인 팀의 설계와 협업을 이끌다</h2>
+      <p>개발 경험이 적은 팀원들과 협업하며 프로젝트 초기에 공통 개발 환경과 협업 규칙을 정리했습니다.</p>
+      <div class="case-block"><h3>팀장으로서 맡은 일</h3><ul><li>공통 개발 환경 구축 및 Git 브랜치 전략 수립</li><li>코드 작성 규칙 정리와 GitHub 코드 리뷰</li><li>주간 회의 및 작업 진행 상황 확인</li><li>전체 일정 관리와 프론트엔드·백엔드 통합 이슈 대응</li><li>ERD·API 명세 설계, 인프라 구성과 최종 배포</li></ul></div>
+      <p>개발 후반 통합 과정에서 발견된 문제를 확인하고 수정 사항을 반영해 계획 일정을 지켰습니다. 특정 팀원의 지연으로 책임을 돌리지 않고, 통합 과정과 대응에 초점을 두었습니다.</p>
+    </section>
+
+    <section class="case-section" id="reflection" aria-labelledby="reflection-title">
+      <p class="eyebrow">06 / OUTCOME & REFLECTION</p><h2 id="reflection-title">예약 도메인과 팀 프로젝트를 끝까지 완성하다</h2>
+      <div class="case-result"><h3>프로젝트 성과</h3><ul><li>베이킹 특화 공간 예약 플랫폼 구현</li><li>예약·결제·이용 후 재료비 정산 흐름 구현</li><li>Docker·EC2 기반 통합 배포</li><li>계획 일정 준수 및 프로젝트 완수</li><li>프로젝트 평가 A+</li></ul><p>개발 완료 상태이며 현재 운영 중인 서비스는 아닙니다.</p></div>
+      <div class="case-block"><h3>회고</h3><p>에브리키친은 아이디어를 실제 서비스로 구현하는 전 과정을 주도한 프로젝트였습니다. 예약 상태와 결제 흐름을 설계하면서 비즈니스 규칙을 코드로 표현하는 경험을 쌓았습니다.</p><p>Redis TTL 예약 선점의 장점과 조회·저장 분리 방식의 동시성 한계를 함께 이해했습니다. 개발 경험이 적은 팀원들과 협업 규칙을 세우고 일정에 맞춰 배포까지 마치며 개발 리딩 역량도 키웠습니다.</p></div>
+    </section>
+    <div class="case-end"><a class="button primary" href="../index.html#projects">← 프로젝트 목록으로 돌아가기</a></div>
+  </main>
+  <footer class="container footer"><span>© 2026 박지선</span><a href="#case-title">맨 위로 ↑</a></footer>
+</body>
+</html>

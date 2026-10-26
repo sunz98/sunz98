@@ -6,6 +6,7 @@
   <meta name="description" content="박지선의 백엔드 개발자 포트폴리오. 프로젝트와 개발 경험을 소개합니다.">
   <title>박지선 · Backend Developer</title>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/every-kitchen.css">
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -111,14 +112,92 @@
           <a class="project-choice" href="#project-kitchen" data-project="project-kitchen"><span class="project-number">03</span><span><strong>에브리키친</strong><small>공유 베이킹 주방 대여 플랫폼</small></span><span class="choice-arrow" aria-hidden="true">↗</span></a>
         </div>
         <div class="project-panels">
-          <article class="project-panel" id="project-worry"><div class="project-art art-blue" aria-hidden="true"><div class="art-grid"></div><div class="workflow"><span>DEVELOP</span><i>→</i><span class="workflow-main">걱정마AI<span>AUTOMATION SERVICE</span></span><i>→</i><span>OPERATE</span></div><span class="art-corner">01 — DEVELOPMENT & OPERATIONS</span></div><div class="project-body"><div class="project-kicker"><span>대표 프로젝트</span><span>개발 · 운영</span></div><h3>걱정마AI</h3><p>네이버 플레이스 키워드 순위 추적 및 블로그 자동화 서비스</p><div class="project-role"><span>MY ROLE</span><strong>초기 개발부터 운영까지 담당</strong></div><details><summary>정리할 프로젝트 이야기 <span aria-hidden="true">+</span></summary><p>담당 기능, 기술 선택 이유, 운영 중 해결한 문제를 실제 경험에 맞춰 정리할 예정입니다. 기간·기술 스택·성과는 확인 후 추가합니다.</p></details><span class="pending">상세 페이지 · 콘텐츠 준비 중</span></div></article>
-          <article class="project-panel" id="project-clear"><div class="project-art art-slate" aria-hidden="true"><div class="art-grid"></div><div class="art-word">클리어분양<span>PROPERTY PLATFORM</span></div><span class="art-corner">02 — INDUSTRY COLLABORATION</span></div><div class="project-body"><div class="project-kicker"><span>기업 연계 프로젝트</span></div><h3>클리어분양</h3><p>미분양 매물을 다루는 플랫폼 프로젝트</p><div class="project-role"><span>MY ROLE</span><strong>담당 역할 정리 예정</strong></div><details><summary>정리할 프로젝트 이야기 <span aria-hidden="true">+</span></summary><p>직접 구현한 기능과 기술적 문제 해결 경험을 정리할 예정입니다. 기간·팀 구성·기술 스택·성과는 확인 후 추가합니다.</p></details><span class="pending">상세 페이지 · 콘텐츠 준비 중</span></div></article>
-          <article class="project-panel" id="project-kitchen"><div class="project-art art-green" aria-hidden="true"><div class="art-grid"></div><div class="art-word">EveryKitchen<span>SHARED BAKING SPACE</span></div><span class="art-corner">03 — PLATFORM PROJECT</span></div><div class="project-body"><div class="project-kicker"><span>플랫폼 프로젝트</span></div><h3>에브리키친</h3><p>공유 베이킹 주방 대여 플랫폼</p><div class="project-role"><span>MY ROLE</span><strong>담당 역할 정리 예정</strong></div><details><summary>정리할 프로젝트 이야기 <span aria-hidden="true">+</span></summary><p>서비스 기획·개발 과정에서 맡은 부분과 기술적 선택을 정리할 예정입니다. 기간·팀 구성·기술 스택·성과는 확인 후 추가합니다.</p></details><span class="pending">상세 페이지 · 콘텐츠 준비 중</span></div></article>
+          <article class="project-panel" id="project-worry"><div class="project-art art-blue" aria-hidden="true"><div class="art-grid"></div><div class="workflow"><span>DEVELOP</span><i>→</i><span class="workflow-main">걱정마AI<span>AUTOMATION SERVICE</span></span><i>→</i><span>OPERATE</span></div><span class="art-corner">01 — DEVELOPMENT & OPERATIONS</span></div><div class="project-body">
+              <div class="project-kicker"><span>대표 프로젝트</span><span>운영 중</span></div>
+              <h3>걱정마AI</h3>
+              <p>네이버 플레이스 순위 분석 및 블로그 자동화 서비스</p>
+              <p class="worry-intro">기획 전담 인력이 없는 소규모 팀에서 초기 설계부터 백엔드 개발, 실제 유료 사용자 대상 운영까지 참여했습니다. 데이터 수집 효율 개선, RabbitMQ 기반 비동기 처리, 자동화 작업의 실패 복구 구조를 구현했습니다.</p>
+              <ul class="worry-contributions">
+                <li><strong>데이터 수집 최적화</strong>브라우저 자동화 기반 수집 방식을 개선하고 수집 주기와 우선순위를 재설계하여 더 많은 키워드를 약 3~4시간 내 수집</li>
+                <li><strong>비동기 처리</strong>RabbitMQ를 활용한 크롤링 작업 분산 및 수집 상태 관리</li>
+                <li><strong>자동화 안정성</strong>블로그 생성·발행 단계를 분리하고 실패 사유 확인과 재시도 기능 구현</li>
+              </ul>
+              <p class="worry-tech">Java · Spring Boot · RabbitMQ · Redis · Python · OpenAI API</p>
+              <p class="worry-result">실제 유료 사용자 대상 서비스 운영 / 2026년 스마트상점 기술보급사업 선정 서비스 개발 참여</p>
+              <div class="worry-links"><a class="button primary" href="projects/worry-free-ai.html">프로젝트 상세 보기 ↗</a><a href="https://www.xn--ai-511iu45b80q.com/landing" target="_blank" rel="noopener noreferrer">실제 서비스 방문 ↗<span class="sr-only"> (새 탭)</span></a></div>
+            </div></article>
+          <article class="project-panel" id="project-clear">
+            <div class="project-art art-slate" aria-hidden="true"><div class="art-grid"></div><div class="art-word">클리어분양<span>PROPERTY PLATFORM</span></div><span class="art-corner">02 — CORPORATE RFP PROJECT</span></div>
+            <div class="project-body">
+              <div class="project-kicker"><span>기업 RFP 협업</span><span>개발 완료 · 미운영</span></div>
+              <h3>클리어분양</h3>
+              <p>미분양 매물 정보 제공 및 상담 연결 플랫폼</p>
+              <p class="clear-intro">16명이 협업한 프로젝트에서 백엔드 팀장을 맡았습니다. 인증·인가, 상담 배정 동시성 제어, AWS 데이터 저장 인프라를 구현하고 ERD·API 명세 설계와 직군 간 협업을 주도했습니다.</p>
+              <ul class="clear-contributions">
+                <li><strong>동시성 제어</strong>Redisson 분산 락으로 상담 담당자 중복 배정 방지</li>
+                <li><strong>인증·인가</strong>Spring Security·JWT·Redis 기반 역할별 API 접근 제어</li>
+                <li><strong>클라우드 저장</strong>AWS RDS·S3·Redis 구성 및 Presigned URL 업로드</li>
+                <li><strong>백엔드 리딩</strong>5명 역할 분담, ERD·Swagger API 명세 설계, 요구사항 조율</li>
+              </ul>
+              <p class="clear-tech">Spring Boot · Spring Security · Redis · Redisson · AWS</p>
+              <p class="clear-result">기업 필수 요구사항 구현 완료 · 배포 환경 시연 · 기업 담당자 대상 최종 발표</p>
+              <a class="button primary" href="projects/clear-sale.html">프로젝트 상세 보기 ↗</a>
+            </div>
+          </article>
+          <article class="project-panel" id="project-kitchen">
+            <div class="project-art art-green" aria-hidden="true"><div class="art-grid"></div><div class="art-word">EveryKitchen<span>BAKING SPACE PLATFORM</span></div><span class="art-corner">03 — TEAM LEAD PROJECT</span></div>
+            <div class="project-body">
+              <div class="project-kicker"><span>팀 리딩</span><span>개발 완료 · 미운영</span></div>
+              <h3>에브리키친</h3>
+              <p>베이킹 특화 공유주방 예약 및 재료 정산 플랫폼</p>
+              <p class="kitchen-intro">베이킹 공간의 설비·재료 관리에 주목해 기획한 공유주방 대여 플랫폼입니다. Redis TTL 기반 예약 선점, KakaoPay 결제와 이용 후 재료비 정산을 구현하고 팀장으로서 설계부터 Docker·AWS EC2 배포까지 주도했습니다.</p>
+              <ul class="kitchen-contributions">
+                <li><strong>예약 선점</strong>Redis TTL을 활용한 10분 예약·결제 대기 관리</li>
+                <li><strong>결제·정산</strong>KakaoPay 예약 이용료 결제와 재료 사용량 기반 추가 정산</li>
+                <li><strong>도메인 설계</strong>베이킹 설비·도구·식재료 관리 모델과 API 설계</li>
+                <li><strong>통합 배포</strong>Docker 기반 프론트엔드·백엔드 AWS EC2 배포</li>
+                <li><strong>팀 리딩</strong>Git 협업 규칙·코드 리뷰·일정 관리 주도</li>
+              </ul>
+              <p class="kitchen-tech">Spring Boot · Redis · Docker · AWS EC2 · KakaoPay API</p>
+              <p class="kitchen-result">계획 일정 준수 · 주요 기능 구현 및 배포 완료 · 프로젝트 평가 A+</p>
+              <a class="button primary" href="projects/every-kitchen.html">프로젝트 상세 보기 ↗</a>
+            </div>
+          </article>
         </div>
       </div>
     </div></section>
 
-    <section class="section container experience" id="experience" aria-labelledby="experience-title"><div><p class="eyebrow">04 / EXPERIENCE & EDUCATION</p><h2 id="experience-title">배움과 경험의 기록</h2></div><div class="placeholder-box"><span class="placeholder-dot" aria-hidden="true"></span><div><h3>차근차근 정리하고 있습니다</h3><p>교육 · 활동 · 경험 이력은 실제 자료를 바탕으로 추가할 예정입니다.</p></div></div></section>
+    <section class="section container experience" id="experience" aria-labelledby="experience-title">
+      <div class="experience-intro">
+        <p class="eyebrow">04 / EXPERIENCE & EDUCATION</p>
+        <h2 id="experience-title">기술을 배우고,<br>현장에서 경험을 쌓았습니다.</h2>
+        <p class="muted">소프트웨어 전공과 백엔드 개발 교육을 바탕으로, IT 기술지원과 실제 서비스 개발을 경험하며 역량을 확장해 왔습니다.</p>
+      </div>
+      <div class="experience-content">
+        <section class="experience-group" aria-labelledby="experience-work-title">
+          <h3 id="experience-work-title">EXPERIENCE</h3>
+          <article class="experience-entry">
+            <div class="experience-entry-meta"><h4>사우디에셋</h4><p>Backend Developer</p></div>
+            <div class="experience-entry-detail"><p class="experience-date"><time datetime="2025-07">2025.07</time> – <time datetime="2026-04">2026.04</time></p><p>걱정마AI 서비스의 백엔드 개발에 참여하며 실제 서비스의 기능 개발과 운영을 경험했습니다. 개발 과정에서 발생하는 기술적 문제를 분석하고 개선하며 서비스 운영 관점의 개발 역량을 쌓았습니다.</p></div>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-entry-meta"><h4>Concentrix Korea</h4><p>Senior IT Technical Support Advisor · 정규직</p></div>
+            <div class="experience-entry-detail"><p class="experience-date"><time datetime="2018-04">2018.04</time> – <time datetime="2019-11">2019.11</time></p><p>IT 기술지원 업무를 수행하며 기술적 문제 해결과 사용자 중심의 커뮤니케이션 경험을 쌓았습니다.</p></div>
+          </article>
+        </section>
+        <section class="experience-group" aria-labelledby="experience-education-title">
+          <h3 id="experience-education-title">EDUCATION</h3>
+          <article class="experience-entry">
+            <div class="experience-entry-meta"><h4>패스트캠퍼스</h4><p>백엔드 개발 부트캠프</p></div>
+            <div class="experience-entry-detail"><p class="experience-date"><time datetime="2024-02">2024.02</time> – <time datetime="2024-09">2024.09</time></p><p>백엔드 개발 교육을 이수하며 서비스 설계와 구현을 학습하고 팀 프로젝트를 수행했습니다.</p></div>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-entry-meta"><h4>단국대학교</h4><p>소프트웨어학과 · 졸업</p></div>
+            <div class="experience-entry-detail"><p>소프트웨어 전공을 통해 개발 역량의 기초를 다졌습니다.</p></div>
+          </article>
+        </section>
+      </div>
+    </section>
     <section class="contact-section container" id="contact" aria-labelledby="contact-title"><p class="eyebrow">05 / CONTACT</p><h2 id="contact-title">다음 이야기는 함께</h2><p class="muted">연락처와 이력서는 준비되는 대로 연결하겠습니다.</p><div class="contact-links"><span>이메일 <small>등록 예정</small></span><span>GitHub <small>주소 확인 예정</small></span><span>이력서 PDF <small>준비 중</small></span></div></section>
   </main>
   <footer class="container footer"><span>© <span id="year">2026</span> 박지선</span><span>Built with HTML, CSS & JavaScript</span><a href="#home">맨 위로 ↑</a></footer>

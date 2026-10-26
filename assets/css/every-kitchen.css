@@ -1,0 +1,47 @@
+/* EveryKitchen card styles stay scoped to this project. */
+#project-kitchen .kitchen-intro { margin-top:18px; }
+#project-kitchen .kitchen-contributions { list-style:none; padding:0; margin:24px 0; display:grid; gap:14px; font-size:13px; color:var(--secondary); }
+#project-kitchen .kitchen-contributions strong { display:block; color:var(--heading); margin-bottom:3px; font-weight:600; }
+#project-kitchen .kitchen-tech { padding-top:18px; border-top:1px solid var(--border); font-size:12px; }
+#project-kitchen .kitchen-result { margin:14px 0 22px; font-size:12px; }
+
+/* Detail page extends the shared case-study system. */
+.kitchen-case .feature-grid-two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.kitchen-case .booking-flow { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.kitchen-case .booking-flow li:nth-child(4)::after { content:'↓'; right:50%; top:auto; bottom:-28px; transform:none; }
+.kitchen-case .booking-flow li:nth-child(5) { grid-column:4; grid-row:2; }
+.kitchen-case .booking-flow li:nth-child(6) { grid-column:3; grid-row:2; }
+.kitchen-case .booking-flow li:nth-child(7) { grid-column:2; grid-row:2; }
+.kitchen-case .booking-flow li:nth-child(8) { grid-column:1; grid-row:2; }
+.kitchen-case .booking-flow li:nth-child(5)::after,
+.kitchen-case .booking-flow li:nth-child(6)::after,
+.kitchen-case .booking-flow li:nth-child(7)::after { content:'←'; right:auto; left:-22px; }
+.kitchen-case .lease-exit { display:flex; flex-direction:column; gap:4px; margin-top:22px; padding:14px 18px; border:1px dashed var(--border); border-radius:8px; background:#f8fafc; font-size:13px; }
+.kitchen-case .lease-exit strong { color:var(--heading); }
+.kitchen-case .lease-exit span { color:var(--secondary); }
+.kitchen-case .improvement { background:#f8fafc; border-left-color:#64748b; }
+.kitchen-case .improvement h3 { color:var(--heading); }
+.kitchen-case .settlement-flow { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.kitchen-case .settlement-flow li:nth-child(3)::after { content:'↓'; right:50%; top:auto; bottom:-28px; transform:none; }
+.kitchen-case .settlement-flow li:nth-child(4) { grid-column:3; grid-row:2; }
+.kitchen-case .settlement-flow li:nth-child(5) { grid-column:2; grid-row:2; }
+.kitchen-case .settlement-flow li:nth-child(6) { grid-column:1; grid-row:2; }
+.kitchen-case .settlement-flow li:nth-child(4)::after,
+.kitchen-case .settlement-flow li:nth-child(5)::after { content:'←'; right:auto; left:-22px; }
+.kitchen-case .deploy-flow { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.kitchen-case .deploy-flow li:nth-child(4)::after { content:none; }
+.kitchen-case .case-note { padding:14px 18px; border:1px dashed var(--border); border-radius:8px; background:#f8fafc; }
+@media(max-width:1000px) {
+  .kitchen-case .feature-grid-two { grid-template-columns:1fr; }
+  .kitchen-case .booking-flow,
+  .kitchen-case .settlement-flow,
+  .kitchen-case .deploy-flow { grid-template-columns:1fr; }
+  .kitchen-case .booking-flow li:nth-child(n),
+  .kitchen-case .settlement-flow li:nth-child(n) { grid-column:auto; grid-row:auto; }
+  .kitchen-case .booking-flow li:nth-child(n)::after,
+  .kitchen-case .settlement-flow li:nth-child(n)::after,
+  .kitchen-case .deploy-flow li:nth-child(n)::after { content:'↓'; right:50%; left:auto; top:auto; bottom:-28px; transform:none; }
+  .kitchen-case .booking-flow li:last-child::after,
+  .kitchen-case .settlement-flow li:last-child::after,
+  .kitchen-case .deploy-flow li:last-child::after { content:none; }
+}

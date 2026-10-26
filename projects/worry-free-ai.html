@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="걱정마AI 백엔드 개발 사례: 데이터 수집 최적화, RabbitMQ 비동기 처리, 블로그 자동화 실패 처리와 운영 경험.">
+  <title>걱정마AI · 박지선 포트폴리오</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/project.css">
+</head>
+<body class="case-study">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="header"><a class="brand" href="../index.html">박지선</a><a class="back-link" href="../index.html#projects">← 프로젝트 목록</a></header>
+  <main id="main" class="container">
+
+    <section class="case-hero" aria-labelledby="case-title">
+      <p class="eyebrow">PROJECT 01 / BACKEND CASE STUDY</p>
+      <h1 id="case-title">걱정마AI</h1>
+      <p class="case-subtitle">네이버 플레이스 순위 분석 및 블로그 콘텐츠 자동화 서비스</p>
+      <p class="case-summary">초기 설계에서 상용 서비스 운영까지,<br>실제 사용자의 문제를 해결하며 개선한 백엔드</p>
+      <div class="case-links"><a href="https://www.xn--ai-511iu45b80q.com/landing" target="_blank" rel="noopener noreferrer">실제 서비스 방문 ↗<span class="sr-only"> (새 탭)</span></a><a href="https://www.sbiz.or.kr/smst/bsns/product/view.do?cmpnSn=1500&amp;prdtSn=1" target="_blank" rel="noopener noreferrer">스마트상점 공식 등록 페이지 ↗<span class="sr-only"> (새 탭)</span></a></div>
+      <dl class="case-facts">
+        <div><dt>기간</dt><dd>2025.07 ~ 2026.04</dd></div>
+        <div><dt>팀 구성</dt><dd>프론트엔드 1명 · 백엔드 2명</dd></div>
+        <div><dt>역할</dt><dd>초기 설계 및 기획 참여<br>백엔드 개발 · 운영 및 유지보수</dd></div>
+        <div><dt>서비스 상태</dt><dd>현재 운영 중</dd></div>
+        <div class="facts-wide"><dt>주요 기술</dt><dd>Java · Spring Boot · RabbitMQ · Redis · Python · OpenAI API</dd></div>
+        <div class="facts-wide"><dt>외부 연동</dt><dd>Kakao OAuth · Toss Payments</dd></div>
+      </dl>
+    </section>
+    <nav class="case-toc" aria-label="상세 페이지 목차">
+      <a href="#overview">개요·기능</a><a href="#collection">수집 최적화</a><a href="#queue">비동기 처리</a><a href="#automation">실패 처리</a><a href="#database">조회 정책</a><a href="#architecture">아키텍처</a><a href="#operations">운영·회고</a>
+    </nav>
+    <section class="case-section" id="overview" aria-labelledby="overview-title">
+      <p class="eyebrow">01 / OVERVIEW</p><h2 id="overview-title">서비스를 만들고, 운영하며 개선했습니다</h2>
+      <p>걱정마AI는 네이버 플레이스 키워드별 매장 순위와 관련 데이터를 분석하고, 블로그 콘텐츠 생성 및 발행을 자동화하는 서비스입니다.</p>
+      <p>기획 전담 인력이 없는 소규모 팀에서 백엔드 상급자와 협업하며 초기 기획, ERD 설계, API 개발부터 실제 유료 사용자 대상 서비스 운영까지 참여했습니다. 운영 과정에서 데이터 수집 효율, 자동화 작업의 실패 처리, 코드 구조를 지속적으로 개선했습니다.</p>
+      <div class="feature-grid">
+        <article><h3>인증 및 상용 서비스 기능</h3><ul><li>JWT 기반 회원가입·로그인 및 권한 관리</li><li>Kakao OAuth 연동</li><li>Toss Payments 결제 API 연동 및 이용권 정보 관리</li><li>관리자 페이지용 API</li></ul></article>
+        <article><h3>플레이스 데이터 수집</h3><ul><li>키워드·placeId 기반 순위, 리뷰 수, 검색량, 경쟁도 조회</li><li>일 단위 순위 및 월 단위 검색량 수집 이력 관리</li><li>유효기간에 따른 기존 DB 조회 및 외부 수집 요청</li><li>사용자 등록 키워드 우선 수집 및 신규 키워드 즉시 수집</li></ul></article>
+        <article><h3>블로그 자동화</h3><ul><li>OpenAI API 기반 콘텐츠 생성</li><li>Python·Playwright 기반 블로그 발행 자동화</li><li>단계별 진행 상태, 실패 사유 기록 및 재시도 기능</li></ul></article>
+      </div>
+    </section>
+<section class="case-section" id="collection" aria-labelledby="collection-title"><p class="eyebrow">02 / ENGINEERING</p><h2 id="collection-title">수집 속도와 수집 정책을 함께 개선하다</h2>
+<div class="case-block"><h3>문제</h3><p>초기에는 Playwright와 Selenium 기반 브라우저 자동화로 네이버 플레이스 데이터를 수집했습니다. 두 개의 크롤러를 동시에 실행해도 24시간 안에 필요한 키워드를 모두 수집하지 못했습니다.</p></div>
+<div class="case-block"><h3>분석 및 개선</h3><p>실제 서비스의 네트워크 요청을 분석해 GraphQL 요청 구조를 파악하고, 이를 활용하는 데이터 수집 방식으로 개선했습니다. 동시에 모든 데이터를 동일한 주기로 수집할 필요가 없다는 점에 주목했습니다.</p>
+<dl class="policy-list"><div><dt>순위 데이터</dt><dd>매일 수집</dd></div><div><dt>가게 상세 정보</dt><dd>2주 간격으로 수집</dd></div><div><dt>사용자 등록 키워드</dt><dd>우선 수집</dd></div><div><dt>신규 키워드</dt><dd>별도 흐름으로 즉시 수집</dd></div><div><dt>기존 데이터</dt><dd>유효기간 확인 후 재사용</dd></div></dl></div>
+<div class="case-result"><h3>결과</h3><p>기존에는 24시간 수집해도 필요한 데이터를 모두 처리하지 못했지만, 개선 후에는 <strong>더 많은 키워드를 약 3~4시간 안에 수집</strong>할 수 있게 되었습니다.</p><p class="case-note">GraphQL 요청 방식 변경과 수집 주기·우선순위 조정 등이 함께 기여한 결과입니다. 동일 조건의 벤치마크나 특정 기술 하나의 개선율로 해석하지 않습니다.</p></div>
+<p>수집 성능은 실행 속도뿐 아니라 데이터 변경 주기, 중요도, 기존 데이터 재사용 정책까지 함께 설계해야 한다는 점을 배웠습니다.</p>
+<p class="verification-note">보완 예정: 외부 서비스 요청 제한 및 인터페이스 변경에 대응한 구체적인 사례는 확인 후 추가합니다.</p></section>
+<section class="case-section" id="queue" aria-labelledby="queue-title"><p class="eyebrow">03 / ENGINEERING</p><h2 id="queue-title">RabbitMQ로 작업 요청과 수집 실행을 분리하다</h2>
+<div class="case-block"><h3>문제와 선택</h3><p>수집 대상 조회, 작업 실행, 결과 저장을 하나의 동기 흐름으로 연결하면 작업 관리와 확장에 한계가 있었습니다. RabbitMQ를 이용해 작업 요청과 크롤러 실행을 분리하고 작업 종류별 큐로 라우팅했습니다.</p></div>
+<figure class="flow-figure"><figcaption>수집 파이프라인 <span>실제 작업 처리 순서</span></figcaption><ol class="flow pipeline">
+<li><span class="step-number">01</span><strong>스케줄러</strong><span>수집 대상 조회</span></li>
+<li><span class="step-number">02</span><strong>RabbitMQ</strong><span>작업 메시지 발행</span></li>
+<li><span class="step-number">03</span><strong>작업 종류별 큐</strong><span>메시지 라우팅</span></li>
+<li><span class="step-number">04</span><strong>크롤러</strong><span>메시지 소비 · 데이터 수집</span></li>
+<li><span class="step-number">05</span><strong>API 서버</strong><span>HTTP 콜백으로 결과 수신</span></li>
+<li><span class="step-number">06</span><strong>DB</strong><span>결과 저장 · 수집 상태 갱신</span></li>
+</ol></figure>
+<div class="case-block"><h3>운영 방식</h3><p>수집 실패는 드물게 발생했고, 주로 유효하지 않은 키워드 등이 원인이었습니다. 별도의 자동 장애 복구 시스템을 구축하지 않았으며, 매일 아침 로그와 실패 작업을 확인하고 필요한 경우 수정하는 방식으로 대응했습니다.</p></div>
+<div class="case-result"><h3>배운 점</h3><p>비동기 처리는 큐에 작업을 넣는 것으로 끝나지 않습니다. 작업 상태 관리, 결과 전달과 운영 중 오류 확인까지 함께 고려해야 한다는 점을 경험했습니다.</p></div></section>
+<section class="case-section" id="automation" aria-labelledby="automation-title"><p class="eyebrow">04 / ENGINEERING</p><h2 id="automation-title">블로그 발행 실패를 단계별로 확인하고 재시도하다</h2>
+<div class="case-block"><h3>초기 문제</h3><p>블로그 발행 기능을 동기식으로 구현하여 중간에 실패하면 사용자에게 오류 원인이 충분히 전달되지 않았고, 작업을 처음부터 다시 실행해야 했습니다.</p></div>
+<figure class="flow-figure"><figcaption>블로그 자동화 단계 <span>각 단계의 상태와 실패 사유 기록</span></figcaption><ol class="flow blog-flow">
+<li><span class="step-number">01</span><strong>계정 유효성 확인</strong><span>사용자 계정 확인</span></li><li><span class="step-number">02</span><strong>콘텐츠 생성</strong><span>OpenAI API</span></li><li><span class="step-number">03</span><strong>블로그 발행</strong><span>Playwright</span></li></ol>
+<p class="flow-retry">실패 사유 안내 → 필요한 조치 → 완료한 작업을 불필요하게 반복하지 않고 재시도</p></figure>
+<div class="case-block"><h3>개선</h3><p>각 단계의 성공·실패 상태와 실패 사유를 기록하여 사용자에게 현재 상황과 필요한 조치를 안내했습니다. 조치 후에는 이전에 완료한 작업을 불필요하게 반복하지 않고 다시 진행할 수 있도록 구현했습니다.</p></div>
+<div class="case-result"><h3>결과</h3><p>사용자가 진행 상황과 오류 원인을 확인할 수 있게 되었으며, 계정 문제처럼 사용자 측 조치가 필요한 상황을 구분해 대응할 수 있게 되었습니다.</p></div></section>
+<section class="case-section" id="database" aria-labelledby="database-title"><p class="eyebrow">05 / ENGINEERING</p><h2 id="database-title">데이터 특성에 맞춰 조회와 갱신 정책을 나누다</h2>
+<div class="case-block"><h3>문제</h3><p>키워드별 플레이스 데이터가 누적되면서 동일한 데이터를 반복 조회하거나 외부 수집 요청을 다시 수행하는 비용을 줄일 필요가 있었습니다.</p></div>
+<div class="case-block"><h3>개선</h3><p><code>crawling</code>, <code>place-ranks</code>, <code>reviews</code> 등 데이터 성격에 따라 저장 구조를 분리하고 <code>placeId</code>를 중심으로 업체를 식별했습니다.</p><ul><li>순위는 일 단위, 검색량은 월 단위 수집 이력 확인</li><li>사용자가 지정한 키워드와 placeId 기준으로 최근 2주 순위 조회 쿼리 구현</li><li>여러 키워드의 순위 정보를 확인할 수 있는 조건별 조회 지원</li><li>수집 성공·실패 상태를 활용해 재수집 여부 판단</li></ul></div>
+<div class="case-result"><h3>결과</h3><p>기존 데이터로 응답할 수 있는 경우 반복 외부 요청을 줄이고, 데이터 특성에 맞는 갱신 정책을 적용했습니다.</p><p class="case-note">조회 응답 시간의 개선 수치는 별도로 측정하지 않았습니다. 별도 집계 테이블을 통한 전체 데이터 사전 계산을 구현한 것으로 설명하지 않습니다.</p></div></section>
+<section class="case-section" id="architecture" aria-labelledby="architecture-title"><p class="eyebrow">06 / ENGINEERING</p><h2 id="architecture-title">멀티모듈 구조로 책임을 분리하다</h2>
+<div class="case-block"><h3>문제와 개선</h3><p>서비스 계층에 여러 도메인의 업무 로직이 집중되면서 코드의 책임과 외부 연동 위치를 파악하기 어려워졌습니다. <code>core</code>, <code>api</code>, <code>admin</code>, <code>scheduler</code>, <code>infra</code> 모듈로 구조를 분리하고, UseCase 중심으로 업무 흐름을 조합했습니다.</p></div>
+<dl class="policy-list"><div><dt>Controller</dt><dd>HTTP 요청 및 응답 처리</dd></div><div><dt>UseCase</dt><dd>조회·수집·저장 등 업무 흐름 조합</dd></div><div><dt>Infra</dt><dd>크롤러 HTTP 연동, RabbitMQ, Redis</dd></div><div><dt>Core</dt><dd>공통 엔티티 및 enum 등 공유 모델</dd></div></dl>
+<div class="case-result"><h3>설계상 한계와 개선 방향</h3><p>관심사 분리와 일부 헥사고날 아키텍처 원칙을 참고했지만, 현재 구조는 <strong>책임 분리를 적용한 멀티모듈 계층형 구조</strong>에 가깝습니다.</p><p>UseCase가 외부 연동 구현체를 직접 참조하는 부분이 있고, core 엔티티도 JPA 어노테이션에 의존합니다. 앞으로 개선할 지점은 이러한 직접 의존의 변경 영향을 살펴보고 필요한 경계를 분리하는 것입니다.</p></div>
+<p>패턴의 이름보다 실제 의존성 방향과 변경 영향을 관리하는 것이 중요하다는 점을 배웠습니다.</p></section>
+<section class="case-section" id="operations" aria-labelledby="operations-title"><p class="eyebrow">07 / OPERATIONS & REFLECTION</p><h2 id="operations-title">사용자 피드백을 다음 개선으로 연결하다</h2>
+<div class="case-block"><h3>사용자 피드백과 운영</h3><ul><li>키워드 선정의 어려움을 해결하기 위한 키워드 추천 기능 개발</li><li>블로그 발행 오류에서 서비스 내부 문제와 사용자 계정 문제를 구분하여 원인 안내</li><li>사용자 요청의 필요성과 서비스 전체 영향도를 검토해 개선 우선순위 결정</li></ul><p>운영을 통해 기능 구현뿐 아니라 장애 대응, 외부 서비스 변경, 사용자 지원에도 상당한 리소스가 필요하다는 점을 경험했습니다.</p></div>
+<div class="case-result"><h3>프로젝트 성과</h3><ul><li>초기 설계부터 상용 서비스 개발·운영까지 참여</li><li>실제 유료 사용자 대상 서비스 운영 및 피드백 반영</li><li>데이터 수집 구조 개선으로 더 많은 키워드를 약 3~4시간 내 수집</li><li>2026년 스마트상점 기술보급사업 선정 서비스의 기술 개발 참여</li></ul><p class="case-note">사업 신청과 대외 업무는 대표자가 담당했으며, 서비스의 기술 개발은 본인과 백엔드 상급자가 함께 수행했습니다.</p><a href="https://www.sbiz.or.kr/smst/bsns/product/view.do?cmpnSn=1500&amp;prdtSn=1" target="_blank" rel="noopener noreferrer">스마트상점 공식 등록 페이지 ↗<span class="sr-only"> (새 탭)</span></a></div>
+<div class="case-block"><h3>회고</h3><p>백엔드 개발은 API 구현으로 끝나지 않는다는 점을 배웠습니다. 초기 설계에서 예상하지 못했던 데이터 증가, 외부 서비스 변경, 장애 대응, 사용자 피드백까지 고려해야 했습니다.</p><p>팀원과의 코드 리뷰를 통해 설계의 이유와 책임 분리의 중요성을 이해하고, 실제 운영에서 발견한 문제를 개선하는 경험을 쌓았습니다.</p></div>
+</section>
+<div class="case-end"><a class="button primary" href="../index.html#projects">← 프로젝트 목록으로 돌아가기</a><a href="https://www.xn--ai-511iu45b80q.com/landing" target="_blank" rel="noopener noreferrer">실제 서비스 방문 ↗<span class="sr-only"> (새 탭)</span></a></div>
+</main><footer class="container footer"><span>© 2026 박지선</span><a href="#case-title">맨 위로 ↑</a></footer>
+</body></html>
